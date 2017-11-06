@@ -2,6 +2,7 @@ package utilities;
 
 import menu.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
@@ -14,15 +15,29 @@ public class Console {
     }
 
     public static double getDouble(String prompt) {
-        sc = new Scanner(System.in);
-        System.out.println(prompt);
-        return sc.nextDouble();
+        do {
+            try {
+                sc = new Scanner(System.in);
+                System.out.println(prompt);
+                return sc.nextDouble();
+            } catch (InputMismatchException e) {
+                Console.print("Please enter a number.");
+                continue;
+            }
+        }while (true);
     }
 
     public static int getInt(String prompt) {
-        sc = new Scanner(System.in);
-        System.out.println(prompt);
-        return sc.nextInt();
+        do {
+            try {
+                sc = new Scanner(System.in);
+                System.out.println(prompt);
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                Console.print("Please enter a number.");
+                continue;
+            }
+        }while (true);
     }
 
     public static void print(String input) {

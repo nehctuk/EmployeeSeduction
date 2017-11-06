@@ -20,7 +20,8 @@ public class IncidentsMenu extends Menu {
 
     @Override
     public void menuTitle() {
-        Console.print("  _____            _     _            _       \n" +
+        Console.print(
+                "  _____            _     _            _       \n" +
                 " |_   _|          (_)   | |          | |      \n" +
                 "   | |  _ __   ___ _  __| | ___ _ __ | |_ ___ \n" +
                 "   | | | '_ \\ / __| |/ _` |/ _ \\ '_ \\| __/ __|\n" +

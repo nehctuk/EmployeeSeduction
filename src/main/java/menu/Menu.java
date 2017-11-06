@@ -14,7 +14,6 @@ public abstract class Menu {
 
     public void display() {
         String userInput;
-        boolean tryCatch = true;
 
         do {
             try {
@@ -22,11 +21,12 @@ public abstract class Menu {
                     userInput = this.getInput().toUpperCase();
                     userMenuSelection(convertEnumsToNums(userInput));
                 } while (!"quit".equalsIgnoreCase(userInput));
+                break;
             } catch (IllegalArgumentException|ArrayIndexOutOfBoundsException e) {
                 Console.print("\nINVALID INPUT!!! Please enter a valid menu option.");
-                tryCatch = false;
+                continue;
             }
-        }while (!tryCatch);
+        }while (true);
     }
 
     public String convertEnumsToNums(String menuNum) {
@@ -37,9 +37,6 @@ public abstract class Menu {
     public String getInput() {
         this.menuTitle();
         Console.print(this.toString());
-//        for (Enum e: menuEnum) {
-//            utilities.Console.print(e.name());
-//        }
         return Console.getString("");
     }
 
