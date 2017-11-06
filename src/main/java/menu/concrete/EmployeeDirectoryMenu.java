@@ -1,11 +1,13 @@
 package menu.concrete;
 
 import benefits.concrete.BenefitSilver;
+import com.sun.tools.javac.code.Attribute;
 import menu.Menu;
 import utilities.Console;
 import utilities.YesNoException;
 import workerRelatedClasses.Employee.Employee;
 import workerRelatedClasses.Employee.EmployeeWareHouse;
+import workerRelatedClasses.department.Department;
 
 import java.util.InputMismatchException;
 
@@ -17,6 +19,7 @@ public class EmployeeDirectoryMenu extends Menu {
     enum employeeDirectoryMenu {
         CREATE_EMPLOYEE,
         FIND_EMPLOYEE,
+        PRINT_EMPLOYEES_BY_DEPARTMENT,
         BACK,
         QUIT
     }
@@ -49,6 +52,9 @@ public class EmployeeDirectoryMenu extends Menu {
             case FIND_EMPLOYEE:
                 employeeSelection();
                 break;
+            case PRINT_EMPLOYEES_BY_DEPARTMENT:
+                printEmployeesByDepartment();
+                break;
             case BACK:
                 Console.goBack(MainMenu.INSTANCE);
                 break;
@@ -56,6 +62,19 @@ public class EmployeeDirectoryMenu extends Menu {
                 Console.quitHRApp();
                 break;
         }
+    }
+
+    private void printEmployeesByDepartment(){
+        String output = "";
+        String input = Console.getString("What department? (Management, Finance, Logistics)");
+        for(Employee employee : EmployeeWareHouse.getEmployeeList()){
+            if(input.equalsIgnoreCase((""
+                    +employee.getDepartment()))){
+                output+= "Name : " + employee.getFirstName() +" "+ employee.getLastName()+" ID: " + employee.getId()+"\n";
+            }
+        }
+        Console.print(output);
+
     }
 
     private void askForSalary(Employee aNewEmployee) {
@@ -142,6 +161,7 @@ public class EmployeeDirectoryMenu extends Menu {
         String enumStrings =
                 "1) Create Employee\n" +
                 "2) Find Employee\n" +
+                "3) Print Employees in Department\n"+
                 "3) Back\n" +
                 "4) Quit";
         return enumStrings;
